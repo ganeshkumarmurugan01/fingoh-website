@@ -139,14 +139,17 @@ nav {
 }
 .hero-headline-block {
   margin-bottom: 56px;
+  width: 100%;
+  text-align: center;
 }
 .hero-body {
   display: grid; grid-template-columns: 1fr 1fr;
-  gap: 72px; align-items: center;
+  gap: 72px; align-items: start;
 }
 .hero-tag {
-  display: inline-flex; align-items: center; gap: 8px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   margin-bottom: 32px;
+  width: 100%;
 }
 .hero-tag-dot {
   width: 6px; height: 6px; border-radius: 50%;
@@ -159,13 +162,15 @@ nav {
 }
 .hero-h1 {
   font-family: var(--font-display);
-  font-size: clamp(36px, 4.5vw, 56px);
+  font-size: clamp(32px, 3.8vw, 48px);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.5;
   letter-spacing: -0.03em;
   margin-bottom: 32px;
 }
 .hero-h1 .accent {
+  display: block;
+  margin-top: 12px;
   color: var(--teal);
   position: relative;
 }
@@ -950,10 +955,10 @@ footer {
           <div class="hero-tag-dot"></div>
           <span class="eyebrow">Intent Intelligence Platform · B2B Trade Fairs</span>
         </div>
-        <p style="font-size:12px;font-weight:700;color:#64748B;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">As an <strong style="color:var(--navy);font-weight:900;">Exhibitor</strong>, you should —</p>
+        <p style="font-size:18px;font-weight:800;color:#64748B;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:16px;">As an <strong style="color:var(--navy);font-weight:900;">Exhibitor</strong>, you should —</p>
         <h1 class="hero-h1">
-          Stop waiting for the right visitors to walk in.<br>
-          <span class="accent">Start generating them yourself.</span>
+          Stop waiting for the right visitors to walk in.
+          <span class="accent">Start bringing them yourself.</span>
         </h1>
       </div>
 
