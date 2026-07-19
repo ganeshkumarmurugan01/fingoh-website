@@ -1,12 +1,13 @@
 interface SolutionsProps {
   onOpenModal: () => void;
+  onOpenWaitlist: () => void;
 }
 
-export default function Solutions({ onOpenModal }: SolutionsProps) {
+export default function Solutions({ onOpenModal, onOpenWaitlist}: SolutionsProps) {
   return (
     <section id="solutions">
       <div className="container">
-        <div className="solutions-header">
+        <div className="solutions-header">  
           <h2>Built for exhibitors. Loved by organisers.</h2>
           <p>Two products solving the same problem from both sides of the trade fair.</p>
         </div>
@@ -24,7 +25,7 @@ export default function Solutions({ onOpenModal }: SolutionsProps) {
               <li>Show ROI dashboard with pipeline attribution</li>
             </ul>
             <button className="btn-primary" style={{ marginTop: 32 }} onClick={onOpenModal}>
-              Get Early Access
+              Book Demo
             </button>
           </div>
 
@@ -39,7 +40,7 @@ export default function Solutions({ onOpenModal }: SolutionsProps) {
               <li>Post-show analytics dashboard for organisers</li>
               <li>White-label option available</li>
             </ul>
-            <button className="waitlist-link" onClick={onOpenModal}>
+            <button className="waitlist-link" onClick={onOpenWaitlist}>
               Join the waitlist →
             </button>
           </div>

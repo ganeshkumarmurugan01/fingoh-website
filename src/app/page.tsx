@@ -14,9 +14,11 @@ import Moats from '@/components/Moats';
 import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
 import WaitlistModal from '@/components/WaitlistModal';
+import WaitlistTypeformModal from '@/components/WaitlistTypeformModal';
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [waitlistOpen, setWaitlistOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -44,13 +46,17 @@ export default function Home() {
         <Platform />
         <HowItWorks />
         <Questions />
-        <Solutions onOpenModal={() => setModalOpen(true)} />
+        <Solutions
+          onOpenModal={() => setModalOpen(true)}
+          onOpenWaitlist={() => setWaitlistOpen(true)}
+        />
         <Pricing onOpenModal={() => setModalOpen(true)} />
         <Moats />
         <CTA onOpenModal={() => setModalOpen(true)} />
       </main>
       <Footer />
       <WaitlistModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+      <WaitlistTypeformModal isOpen={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
     </>
   );
 }

@@ -15,7 +15,7 @@ export default function Hero({ onOpenModal }: HeroProps) {
             <div className="hero-tag">
               <span className="hero-tag-dot" />
               <span style={{ fontSize: 18, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                As an <strong>EXHIBITOR</strong>, you should —
+                As an <strong>EXHIBITOR</strong>, you should 
               </span>
             </div>
             <h1 className="hero-h1">

@@ -7,10 +7,10 @@ export default function Pricing({ onOpenModal }: PricingProps) {
     {
       name: 'Starter',
       for: 'Solo exhibitors and small teams attending 1–2 shows per year',
-      amount: 'From $299 / show',
+      amount: 'From $299 / event',
       features: [
         'Up to 500 ICP-matched prospects',
-        'Pre-show email sequences',
+        'Up to 50 Deep IEI analysis reports',
         'Live badge scan scoring',
         'Post-show follow-up (1 sequence)',
         'CSV export',
@@ -21,13 +21,14 @@ export default function Pricing({ onOpenModal }: PricingProps) {
     {
       name: 'Growth',
       for: 'Teams attending 3–6 shows per year who want full automation',
-      amount: 'From $799 / show',
+      amount: 'From $799 / event',
       features: [
         'Up to 2,000 ICP-matched prospects',
+        'Up to 200 Deep IEI analysis reports',
         'Multi-channel outreach (email + LinkedIn)',
         'Live intent scoring dashboard',
         'Post-show follow-up (3 sequences)',
-        'HubSpot & Salesforce sync',
+        'CRM Integration (Zoho CRM, HubSpot, Salesforce)',
         'Show ROI reporting',
       ],
       featured: true,
