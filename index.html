@@ -134,9 +134,15 @@ nav {
 }
 .hero-inner {
   position: relative; z-index: 2;
+  display: flex; flex-direction: column;
+  padding: 100px 0 80px;
+}
+.hero-headline-block {
+  margin-bottom: 56px;
+}
+.hero-body {
   display: grid; grid-template-columns: 1fr 1fr;
-  gap: 80px; align-items: center;
-  padding: 112px 0 96px;
+  gap: 72px; align-items: center;
 }
 .hero-tag {
   display: inline-flex; align-items: center; gap: 8px;
@@ -885,7 +891,7 @@ footer {
 
 /* ── RESPONSIVE ─────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero-body { grid-template-columns: 1fr; gap: 48px; }
   .hero-video-wrap { max-width: 540px; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .stat-item + .stat-item::before { display: none; }
@@ -937,7 +943,9 @@ footer {
   <div class="hero-glow"></div>
   <div class="container">
     <div class="hero-inner">
-      <div class="hero-left fade-up">
+
+      <!-- Full-width headline block -->
+      <div class="hero-headline-block fade-up">
         <div class="hero-tag">
           <div class="hero-tag-dot"></div>
           <span class="eyebrow">Intent Intelligence Platform · B2B Trade Fairs</span>
@@ -945,35 +953,41 @@ footer {
         <p style="font-size:12px;font-weight:700;color:#64748B;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">As an <strong style="color:var(--navy);font-weight:900;">Exhibitor</strong>, you should —</p>
         <h1 class="hero-h1">
           Stop waiting for the right visitors to walk in.<br>
-          <span class="accent">Start bringing them yourself.</span>
+          <span class="accent">Start generating them yourself.</span>
         </h1>
-        <p class="hero-sub">
-          Fingoh activates your idle leads and prospects — scoring them, sending personal invitations, and capturing their intent before the doors open. On the floor, your staff captures business card details of every walk-in visitor and logs live conversation signals — so no contact ever falls through the cracks.
-        </p>
-        <div class="hero-pills">
-          <span class="pill active">Activate your idle leads</span>
-          <span class="pill active">Invite your prospects</span>
-          <span class="pill active">Manage buyers on the floor</span>
+      </div>
+
+      <!-- Two-column body: text left, video right -->
+      <div class="hero-body">
+        <div class="hero-left fade-up delay-1">
+          <p class="hero-sub">
+            Fingoh activates your idle leads and prospects — scoring them, sending personal invitations, and capturing their intent before the doors open. On the floor, your staff captures business card details of every walk-in visitor and logs live conversation signals — so no contact ever falls through the cracks.
+          </p>
+          <div class="hero-pills">
+            <span class="pill active">Activate your idle leads</span>
+            <span class="pill active">Invite your prospects</span>
+            <span class="pill active">Manage buyers on the floor</span>
+          </div>
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="openCalendly()">Book a 30-min demo</button>
+            <button class="btn-ghost" onclick="document.getElementById('platform').scrollIntoView({behavior:'smooth'})">Explore the platform →</button>
+          </div>
         </div>
-        <div class="hero-actions">
-          <button class="btn-primary" onclick="openCalendly()">Book a 30-min demo</button>
-          <button class="btn-ghost" onclick="document.getElementById('platform').scrollIntoView({behavior:'smooth'})">Explore the platform →</button>
+
+        <!-- Hero product demo video -->
+        <div class="hero-video-wrap fade-up delay-2">
+          <video id="heroVideo" preload="none" playsinline>
+            <source src="" type="video/mp4">
+          </video>
+          <div class="hero-video-overlay" id="videoOverlay" onclick="playHeroVideo()">
+            <div class="play-btn-circle">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <span class="hero-video-label">Watch product demo</span>
+          </div>
         </div>
       </div>
 
-      <!-- Hero product demo video -->
-      <div class="hero-video-wrap fade-up delay-2">
-        <video id="heroVideo" preload="none" playsinline>
-          <!-- Replace src with your actual video file URL -->
-          <source src="" type="video/mp4">
-        </video>
-        <div class="hero-video-overlay" id="videoOverlay" onclick="playHeroVideo()">
-          <div class="play-btn-circle">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-          <span class="hero-video-label">Watch product demo</span>
-        </div>
-      </div>
     </div>
   </div>
 </section>
