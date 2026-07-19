@@ -20,18 +20,19 @@
 /* ── TOKENS ─────────────────────────────────────────────────────────────── */
 :root {
   --navy:      #0A1628;
-  --navy-mid:  #0F2040;
-  --navy-light:#162B52;
-  --teal:      #00C2A8;
-  --teal-dim:  #00957F;
-  --teal-glow: rgba(0,194,168,0.15);
-  --amber:     #F59E0B;
-  --amber-dim: rgba(245,158,11,0.15);
-  --white:     #F8F7F4;
-  --slate:     #94A3B8;
+  --navy-mid:  #EEF2F8;
+  --navy-light:#E2E9F4;
+  --teal:      #00A896;
+  --teal-dim:  #007A6E;
+  --teal-glow: rgba(0,168,150,0.10);
+  --amber:     #D97706;
+  --amber-dim: rgba(217,119,6,0.10);
+  --white:     #FFFFFF;
+  --bg:        #F7F8FA;
+  --slate:     #475569;
   --slate-dark:#64748B;
-  --border:    rgba(255,255,255,0.08);
-  --card-bg:   rgba(255,255,255,0.04);
+  --border:    rgba(0,0,0,0.08);
+  --card-bg:   #FFFFFF;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body:    'Inter', sans-serif;
 }
@@ -40,8 +41,8 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  background: var(--navy);
-  color: var(--white);
+  background: var(--bg);
+  color: var(--navy);
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.6;
@@ -70,7 +71,7 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(12px);
-  background: rgba(10,22,40,0.85);
+  background: rgba(247,248,250,0.92);
 }
 .nav-inner {
   display: flex; align-items: center; justify-content: space-between;
@@ -95,7 +96,7 @@ nav {
   font-size: 14px; font-weight: 500; color: var(--slate);
   transition: color 0.2s;
 }
-.nav-links a:hover { color: var(--white); }
+.nav-links a:hover { color: var(--navy); }
 .nav-cta {
   background: var(--teal); color: var(--navy);
   font-family: var(--font-display);
@@ -118,14 +119,14 @@ nav {
 .hero-grid {
   position: absolute; inset: 0;
   background-image:
-    linear-gradient(rgba(0,194,168,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,194,168,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 .hero-glow {
   position: absolute; top: -20%; right: -10%;
   width: 700px; height: 700px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(0,194,168,0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0,168,150,0.06) 0%, transparent 70%);
   pointer-events: none;
 }
 .hero-inner {
@@ -197,95 +198,49 @@ nav {
   transition: color 0.2s;
   cursor: pointer; background: none; border: none;
 }
-.btn-ghost:hover { color: var(--white); }
+.btn-ghost:hover { color: var(--navy); }
 
-/* ── SCORE CARD (Hero signature element) ────────────────────────────────── */
-.score-card-wrap {
+/* ── HERO VIDEO ──────────────────────────────────────────────────────────── */
+.hero-video-wrap {
   position: relative;
-}
-.score-card {
-  background: var(--navy-mid);
-  border: 1px solid var(--border);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 40px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,194,168,0.1);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06);
+  background: #0A1628;
+  aspect-ratio: 16/9;
 }
-.score-card-header {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
+.hero-video-wrap video {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
 }
-.score-card-title {
-  font-family: var(--font-display);
-  font-size: 12px; font-weight: 600;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--slate);
-}
-.live-badge {
-  display: flex; align-items: center; gap: 5px;
-  font-size: 11px; font-weight: 600; color: var(--teal);
-  letter-spacing: 0.06em;
-}
-.live-badge::before {
-  content: '';
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--teal);
-  animation: pulse 1.5s infinite;
-}
-.score-row {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
-  display: grid; grid-template-columns: 1fr auto auto;
-  align-items: center; gap: 16px;
+.hero-video-overlay {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 16px;
+  background: linear-gradient(135deg, rgba(10,22,40,0.85) 0%, rgba(10,22,40,0.70) 100%);
+  cursor: pointer;
   transition: background 0.2s;
 }
-.score-row:last-child { border-bottom: none; }
-.score-row:hover { background: rgba(255,255,255,0.02); }
-.score-row.top { background: rgba(0,194,168,0.05); border-left: 3px solid var(--teal); }
-.visitor-name {
+.hero-video-overlay:hover { background: linear-gradient(135deg, rgba(10,22,40,0.75) 0%, rgba(10,22,40,0.60) 100%); }
+.hero-video-overlay.hidden { display: none; }
+.play-btn-circle {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--teal);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 32px rgba(0,168,150,0.45);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.hero-video-overlay:hover .play-btn-circle {
+  transform: scale(1.08);
+  box-shadow: 0 12px 40px rgba(0,168,150,0.55);
+}
+.play-btn-circle svg { width: 28px; height: 28px; fill: #fff; margin-left: 4px; }
+.hero-video-label {
   font-family: var(--font-display);
   font-size: 14px; font-weight: 600;
-  margin-bottom: 2px;
-}
-.visitor-meta { font-size: 12px; color: var(--slate); }
-.iei-score {
-  font-family: var(--font-display);
-  font-size: 28px; font-weight: 700;
-  letter-spacing: -0.02em;
-  min-width: 52px; text-align: right;
-}
-.iei-score.t1 { color: var(--teal); }
-.iei-score.t2 { color: #60A5FA; }
-.iei-score.t3 { color: var(--slate); }
-.tier-badge {
-  font-family: var(--font-display);
-  font-size: 11px; font-weight: 700;
-  padding: 3px 8px; border-radius: 4px;
-  letter-spacing: 0.04em;
-}
-.tier-badge.t1 { background: var(--teal-glow); color: var(--teal); border: 1px solid rgba(0,194,168,0.3); }
-.tier-badge.t2 { background: rgba(96,165,250,0.1); color: #60A5FA; border: 1px solid rgba(96,165,250,0.3); }
-.tier-badge.t3 { background: rgba(100,116,139,0.15); color: var(--slate); border: 1px solid rgba(100,116,139,0.3); }
-.score-card-footer {
-  padding: 12px 20px;
-  background: rgba(0,0,0,0.2);
-  display: flex; justify-content: space-between; align-items: center;
-}
-.score-card-footer span { font-size: 12px; color: var(--slate-dark); }
-.score-card-footer .teal { font-weight: 600; }
-.floating-alert {
-  position: absolute; top: -18px; right: -18px;
-  background: var(--amber);
-  color: var(--navy);
-  font-family: var(--font-display);
-  font-size: 12px; font-weight: 700;
-  padding: 8px 14px; border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(245,158,11,0.4);
-  animation: float 3s ease-in-out infinite;
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.02em;
 }
 
 /* ── STATS BAR ──────────────────────────────────────────────────────────── */
@@ -394,7 +349,7 @@ nav {
 .signal-tag {
   font-size: 11px; font-weight: 500;
   padding: 4px 10px; border-radius: 4px;
-  background: rgba(255,255,255,0.04);
+  background: rgba(0,0,0,0.04);
   border: 1px solid var(--border);
   color: var(--slate);
 }
@@ -420,14 +375,14 @@ nav {
   border-radius: 16px; overflow: hidden;
 }
 .step-card {
-  background: var(--navy);
+  background: var(--white);
   padding: 40px;
 }
 .step-num {
   font-family: var(--font-display);
   font-size: 64px; font-weight: 700;
   letter-spacing: -0.04em; line-height: 1;
-  color: rgba(0,194,168,0.15);
+  color: rgba(0,168,150,0.20);
   margin-bottom: 20px;
 }
 .step-title {
@@ -445,7 +400,7 @@ nav {
   font-size: 13px; color: var(--slate);
   line-height: 1.6;
 }
-.decay-banner strong { color: var(--white); }
+.decay-banner strong { color: var(--navy); }
 
 /* ── INTELLIGENCE QUESTIONS ─────────────────────────────────────────────── */
 #questions { padding: 96px 0; }
@@ -587,7 +542,7 @@ nav {
   text-align: center;
   font-size: 15px; line-height: 1.7;
 }
-.pricing-philosophy strong { color: var(--white); }
+.pricing-philosophy strong { color: var(--navy); }
 .pricing-section-label {
   font-family: var(--font-display);
   font-size: 12px; font-weight: 600;
@@ -601,13 +556,13 @@ nav {
   margin-bottom: 48px;
 }
 .price-card {
-  background: var(--navy);
+  background: var(--white);
   padding: 36px;
   position: relative;
 }
 .price-card.featured {
-  background: linear-gradient(160deg, rgba(0,194,168,0.08) 0%, var(--navy) 60%);
-  border: 1px solid rgba(0,194,168,0.2);
+  background: linear-gradient(160deg, rgba(0,168,150,0.07) 0%, var(--white) 60%);
+  border: 1px solid rgba(0,168,150,0.25);
   margin: -1px;
   border-radius: 4px;
 }
@@ -656,7 +611,7 @@ nav {
   background: transparent; color: var(--slate);
   border: 1px solid var(--border);
 }
-.btn-price.ghost-btn:hover { border-color: var(--teal); color: var(--white); }
+.btn-price.ghost-btn:hover { border-color: var(--teal); color: var(--navy); }
 .annual-cards {
   display: grid; grid-template-columns: repeat(2, 1fr);
   gap: 2px; background: var(--border);
@@ -664,7 +619,7 @@ nav {
   margin-bottom: 40px;
 }
 .annual-card {
-  background: var(--navy);
+  background: var(--white);
   padding: 36px;
 }
 .annual-card .price-name { font-size: 18px; }
@@ -802,7 +757,7 @@ nav {
   border: 1px solid var(--border); cursor: pointer;
   transition: all 0.2s;
 }
-.btn-cta-ghost:hover { border-color: var(--border); color: var(--white); }
+.btn-cta-ghost:hover { border-color: rgba(0,0,0,0.2); color: var(--navy); }
 
 /* ── FOOTER ─────────────────────────────────────────────────────────────── */
 footer {
@@ -821,7 +776,7 @@ footer {
   display: flex; gap: 28px; list-style: none;
 }
 .footer-links a { font-size: 13px; color: var(--slate-dark); transition: color 0.2s; }
-.footer-links a:hover { color: var(--white); }
+.footer-links a:hover { color: var(--navy); }
 .footer-copy { font-size: 13px; color: var(--slate-dark); }
 
 /* ── CALENDLY CTA ───────────────────────────────────────────────────────── */
@@ -855,7 +810,7 @@ footer {
   padding: 11px 22px; border-radius: 8px;
   transition: border-color 0.2s, color 0.2s;
 }
-.btn-investor:hover { border-color: var(--teal); color: var(--white); }
+.btn-investor:hover { border-color: var(--teal); color: var(--teal); }
 
 /* ── WAITLIST MODAL ──────────────────────────────────────────────────────── */
 .modal-overlay {
@@ -892,7 +847,7 @@ footer {
   color: var(--slate); font-size: 22px; line-height: 1;
   padding: 4px; transition: color 0.2s; flex-shrink: 0;
 }
-.modal-close:hover { color: var(--white); }
+.modal-close:hover { color: var(--navy); }
 .modal-body { flex: 1; overflow: hidden; }
 .modal-body iframe { width: 100%; height: 560px; border: none; display: block; }
 
@@ -909,7 +864,7 @@ footer {
 /* ── RESPONSIVE ─────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-  .score-card-wrap { max-width: 480px; }
+  .hero-video-wrap { max-width: 540px; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .stat-item + .stat-item::before { display: none; }
   .pain-grid { grid-template-columns: 1fr; }
@@ -984,50 +939,17 @@ footer {
         </div>
       </div>
 
-      <!-- Signature: live IEI score card -->
-      <div class="score-card-wrap fade-up delay-2">
-        <div class="floating-alert">⚡ T1 alert: Sarah Chen at Booth</div>
-        <div class="score-card">
-          <div class="score-card-header">
-            <span class="score-card-title">IEI Visitor Scores · Live</span>
-            <span class="live-badge">LIVE</span>
+      <!-- Hero product demo video -->
+      <div class="hero-video-wrap fade-up delay-2">
+        <video id="heroVideo" preload="none" playsinline>
+          <!-- Replace src with your actual video file URL -->
+          <source src="" type="video/mp4">
+        </video>
+        <div class="hero-video-overlay" id="videoOverlay" onclick="playHeroVideo()">
+          <div class="play-btn-circle">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
           </div>
-          <div class="score-row top">
-            <div>
-              <div class="visitor-name">Sarah Chen</div>
-              <div class="visitor-meta">VP Procurement · Siemens AG</div>
-            </div>
-            <div class="iei-score t1" id="score1">87</div>
-            <span class="tier-badge t1">T1</span>
-          </div>
-          <div class="score-row">
-            <div>
-              <div class="visitor-name">Marcus Webb</div>
-              <div class="visitor-meta">Head of Supply Chain · Bosch</div>
-            </div>
-            <div class="iei-score t1" id="score2">74</div>
-            <span class="tier-badge t1">T1</span>
-          </div>
-          <div class="score-row">
-            <div>
-              <div class="visitor-name">Priya Nair</div>
-              <div class="visitor-meta">Procurement Manager · ABB</div>
-            </div>
-            <div class="iei-score t2" id="score3">61</div>
-            <span class="tier-badge t2">T2</span>
-          </div>
-          <div class="score-row">
-            <div>
-              <div class="visitor-name">James Holden</div>
-              <div class="visitor-meta">Category Buyer · Schneider</div>
-            </div>
-            <div class="iei-score t3" id="score4">38</div>
-            <span class="tier-badge t3">T3</span>
-          </div>
-          <div class="score-card-footer">
-            <span>312 visitors scored</span>
-            <span class="teal">24 T1 contacts →</span>
-          </div>
+          <span class="hero-video-label">Watch product demo</span>
         </div>
       </div>
     </div>
@@ -1484,44 +1406,15 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-// ── SCORE COUNTER ANIMATION (hero signature) ─────────────────────────────
-function animateScore(id, target, duration = 1200) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const start = Math.max(0, target - 30);
-  const startTime = performance.now();
-  function update(now) {
-    const progress = Math.min((now - startTime) / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
-    el.textContent = Math.round(start + (target - start) * eased);
-    if (progress < 1) requestAnimationFrame(update);
-  }
-  requestAnimationFrame(update);
+// ── HERO VIDEO PLAY ──────────────────────────────────────────────────────
+function playHeroVideo() {
+  const video = document.getElementById('heroVideo');
+  const overlay = document.getElementById('videoOverlay');
+  if (!video) return;
+  overlay.classList.add('hidden');
+  video.controls = true;
+  video.play().catch(() => { overlay.classList.remove('hidden'); });
 }
-
-// Trigger when hero is visible
-const heroObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      setTimeout(() => animateScore('score1', 87, 1400), 400);
-      setTimeout(() => animateScore('score2', 74, 1200), 600);
-      setTimeout(() => animateScore('score3', 61, 1000), 800);
-      setTimeout(() => animateScore('score4', 38, 900), 1000);
-      heroObserver.disconnect();
-    }
-  });
-}, { threshold: 0.3 });
-heroObserver.observe(document.getElementById('hero'));
-
-// ── LIVE SCORE PULSE (subtle score update simulation) ────────────────────
-setInterval(() => {
-  const el = document.getElementById('score1');
-  if (!el) return;
-  const current = parseInt(el.textContent);
-  const delta = Math.random() > 0.5 ? 1 : -1;
-  const next = Math.max(82, Math.min(94, current + delta));
-  el.textContent = next;
-}, 3800);
 
 // ── CALENDLY POPUP FALLBACK (for nav + hero buttons) ─────────────────────
 function openCalendly() {
