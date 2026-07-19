@@ -84,6 +84,36 @@ export default function Pricing({ onOpenModal }: PricingProps) {
             </div>
           ))}
         </div>
+        {/* Add-ons note */}
+        <div style={{
+          textAlign: 'center',
+          marginTop: 24,
+          padding: '16px 24px',
+          background: 'rgba(0,194,168,0.04)',
+          border: '1px solid rgba(0,194,168,0.15)',
+          borderRadius: 10,
+          fontSize: 14,
+          color: 'var(--slate)',
+          lineHeight: 1.6,
+        }}>
+          🧩 <strong style={{ color: 'var(--navy)' }}>Need more?</strong> All plans support
+          add-ons — purchase additional ICP-matched contacts, Deep IEI analysis reports, or
+          extra outreach sequences on demand.{' '}
+          <button
+            onClick={onOpenModal}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: 'var(--teal)',
+              fontWeight: 600,
+              cursor: 'pointer',
+              fontSize: 14,
+              padding: 0,
+            }}
+          >
+            Talk to us about add-ons →
+          </button>
+        </div>
       </div>
     </section>
   );
