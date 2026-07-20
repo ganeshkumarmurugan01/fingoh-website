@@ -87,15 +87,29 @@ export default function SignupModal({ isOpen, onClose }: SignupModalProps) {
         </div>
 
         {done ? (
-          <div style={{ padding: '0 32px 32px', textAlign: 'center' }}>
-            <div style={{ fontSize: 48, marginBottom: 16 }}>🎉</div>
-            <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, color: '#0A1628', margin: '0 0 8px' }}>Account created!</h3>
-            <p style={{ fontSize: 14, color: '#5A6A7A', lineHeight: 1.6, margin: '0 0 24px' }}>
-              Check your inbox for your welcome email, then log in to your dashboard at <strong>exhibitor.fingoh.ai</strong>
+          <div style={{ padding: '0 32px 32px' }}>
+            <div style={{ textAlign: 'center', marginBottom: 20 }}>
+              <div style={{ fontSize: 48, marginBottom: 12 }}>📧</div>
+              <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 700, color: '#0A1628', margin: '0 0 8px' }}>Check your inbox</h3>
+              <p style={{ fontSize: 14, color: '#5A6A7A', lineHeight: 1.6, margin: 0 }}>
+                We've sent a verification email to <strong>{form.email}</strong>.
+              </p>
+            </div>
+            <div style={{ background: '#FFF7ED', border: '1px solid #FED7AA', borderRadius: 10, padding: '14px 18px', marginBottom: 20 }}>
+              <p style={{ fontSize: 13, color: '#92400E', margin: '0 0 6px', fontWeight: 700 }}>⚠ Verify your email to activate your account</p>
+              <ol style={{ fontSize: 13, color: '#92400E', margin: 0, paddingLeft: 18, lineHeight: 1.8 }}>
+                <li>Open the verification email from Fingoh</li>
+                <li>Click the <strong>"Confirm your email"</strong> link</li>
+                <li>You'll be redirected to log in automatically</li>
+              </ol>
+            </div>
+            <div style={{ background: '#F0FDF4', border: '1px solid #BBF7D0', borderRadius: 10, padding: '12px 16px', marginBottom: 20, fontSize: 13, color: '#166534', lineHeight: 1.6 }}>
+              <strong>Your Free Trial includes:</strong> 1 event · 100 contacts · 10 Deep IEI analyses · Staff app
+            </div>
+            <p style={{ fontSize: 12, color: '#94A3B8', textAlign: 'center', margin: 0 }}>
+              Didn't receive it? Check your spam folder or{' '}
+              <a href="mailto:hello@fingoh.ai" style={{ color: '#3B9EE8' }}>contact us</a>.
             </p>
-            <a href="https://exhibitor.fingoh.ai" style={{ display: 'inline-block', background: '#3B9EE8', color: '#fff', padding: '12px 28px', borderRadius: 8, fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>
-              Go to Dashboard →
-            </a>
           </div>
         ) : (
           <form onSubmit={handleSubmit} style={{ padding: '0 32px 32px' }}>
