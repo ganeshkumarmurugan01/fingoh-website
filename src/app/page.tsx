@@ -15,10 +15,12 @@ import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
 import WaitlistModal from '@/components/WaitlistModal';
 import WaitlistTypeformModal from '@/components/WaitlistTypeformModal';
+import SignupModal from '@/components/SignupModal';
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
   const [waitlistOpen, setWaitlistOpen] = useState(false);
+  const [signupOpen, setSignupOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -38,7 +40,7 @@ export default function Home() {
 
   return (
     <>
-      <Navbar onOpenModal={() => setModalOpen(true)} />
+      <Navbar onOpenModal={() => setModalOpen(true)} onOpenSignup={() => setSignupOpen(true)} />
       <main>
         <Hero onOpenModal={() => setModalOpen(true)} />
         <Stats />
@@ -50,13 +52,14 @@ export default function Home() {
           onOpenModal={() => setModalOpen(true)}
           onOpenWaitlist={() => setWaitlistOpen(true)}
         />
-        <Pricing onOpenModal={() => setModalOpen(true)} />
+        <Pricing onOpenModal={() => setModalOpen(true)} onOpenSignup={() => setSignupOpen(true)} />
         <Moats />
         <CTA onOpenModal={() => setModalOpen(true)} />
       </main>
       <Footer />
       <WaitlistModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
       <WaitlistTypeformModal isOpen={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
+      <SignupModal isOpen={signupOpen} onClose={() => setSignupOpen(false)} />
     </>
   );
 }

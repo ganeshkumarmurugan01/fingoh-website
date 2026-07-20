@@ -1,8 +1,9 @@
 interface PricingProps {
   onOpenModal: () => void;
+  onOpenSignup: () => void;
 }
 
-export default function Pricing({ onOpenModal }: PricingProps) {
+export default function Pricing({ onOpenModal, onOpenSignup }: PricingProps) {
   const plans = [
     {
       name: 'Starter',
@@ -16,7 +17,8 @@ export default function Pricing({ onOpenModal }: PricingProps) {
         'CSV export',
       ],
       featured: false,
-      cta: 'Get Started',
+      cta: 'Start Free Trial',
+      ctaAction: 'signup' as const,
     },
     {
       name: 'Growth',
@@ -32,7 +34,8 @@ export default function Pricing({ onOpenModal }: PricingProps) {
         'Show ROI reporting',
       ],
       featured: true,
-      cta: 'Get Started',
+      cta: 'Start Free Trial',
+      ctaAction: 'signup' as const,
     },
     {
       name: 'Scale',
@@ -48,6 +51,7 @@ export default function Pricing({ onOpenModal }: PricingProps) {
       ],
       featured: false,
       cta: 'Talk to Sales',
+      ctaAction: 'demo' as const,
     },
   ];
 
@@ -77,7 +81,7 @@ export default function Pricing({ onOpenModal }: PricingProps) {
               </ul>
               <button
                 className={`btn-price ${plan.featured ? 'primary-btn' : 'ghost-btn'}`}
-                onClick={onOpenModal}
+                onClick={plan.ctaAction === 'signup' ? onOpenSignup : onOpenModal}
               >
                 {plan.cta}
               </button>

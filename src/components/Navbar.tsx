@@ -1,15 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
 
 interface NavbarProps {
   onOpenModal: () => void;
+  onOpenSignup: () => void;
 }
 
-export default function Navbar({ onOpenModal }: NavbarProps) {
-  const [menuOpen, setMenuOpen] = useState(false);
-
+export default function Navbar({ onOpenModal, onOpenSignup }: NavbarProps) {
   return (
     <nav>
       <div className="container">
@@ -26,9 +24,21 @@ export default function Navbar({ onOpenModal }: NavbarProps) {
             <li><a href="mailto:hello@fingoh.ai">hello@fingoh.ai</a></li>
           </ul>
 
-          <button className="nav-cta" onClick={onOpenModal}>
-            Book a Demo
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <button
+              className="nav-cta"
+              onClick={onOpenSignup}
+              style={{ background: '#3B9EE8', color: '#fff' }}
+            >
+              Start Free Trial
+            </button>
+            <button
+              onClick={onOpenModal}
+              style={{ background: 'none', border: '1px solid rgba(0,0,0,0.12)', padding: '9px 16px', borderRadius: 6, fontSize: 14, fontWeight: 600, color: '#5A6A7A', cursor: 'pointer', whiteSpace: 'nowrap', fontFamily: 'inherit' }}
+            >
+              Book a Demo
+            </button>
+          </div>
         </div>
       </div>
     </nav>
