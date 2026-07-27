@@ -46,15 +46,16 @@ export default function Hero({ onOpenModal }: HeroProps) {
             </div>
 
             <div className="hero-video-wrap">
-              <div className="hero-video-overlay">
-                <div className="play-btn-circle">
-                  <svg viewBox="0 0 24 24" style={{ width: 28, height: 28, fill: '#fff', marginLeft: 4 }}>
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-                <span className="hero-video-label">Watch 2-min overview</span>
-              </div>
-            </div>
+                <video
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+  >
+    <source src="/demo-video.mov" type="video/mp4" />
+  </video>
+</div>
           </div>
         </div>
       </div>
