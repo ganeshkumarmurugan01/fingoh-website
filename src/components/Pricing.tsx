@@ -8,7 +8,7 @@ export default function Pricing({ onOpenModal, onOpenSignup }: PricingProps) {
     {
       name: 'Starter',
       for: 'Solo exhibitors and small teams attending 1–2 shows per year',
-      amount: 'From $299 / event',
+      amount: 'Contact Sales',
       features: [
         'Up to 500 ICP-matched prospects',
         'Up to 50 Deep IEI analysis reports',
@@ -23,7 +23,7 @@ export default function Pricing({ onOpenModal, onOpenSignup }: PricingProps) {
     {
       name: 'Growth',
       for: 'Teams attending 3–6 shows per year who want full automation',
-      amount: 'From $799 / event',
+      amount: 'Contact Sales',
       features: [
         'Up to 2,000 ICP-matched prospects',
         'Up to 200 Deep IEI analysis reports',
