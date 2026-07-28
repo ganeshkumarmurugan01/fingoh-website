@@ -61,7 +61,7 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/fingoh-logo.png"
+              src="/fingoh-logo-white.png"
               alt="Fingoh.ai"
               style={{ height: 28, width: 'auto', marginBottom: 12 }}
             />
