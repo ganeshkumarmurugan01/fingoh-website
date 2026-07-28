@@ -33,7 +33,7 @@ export default function Navbar({ onOpenModal, onOpenSignup }: NavbarProps) {
             >
               Start Free Trial
             </button>
-            <button className="nav-cta" onClick={() => { Analytics.bookDemoClick('navbar'); onOpenModal(); }}>
+            <button className="nav-cta" onClick={() => { Analytics.bookDemoClick('navbar'); onOpenModal(); }}> 
               Book a Demo
             </button>
           </div>
