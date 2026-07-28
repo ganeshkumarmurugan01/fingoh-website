@@ -4,7 +4,7 @@ import "@/styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Fingoh.ai — Intent Intelligence for B2B Trade Fairs",
-  description: "Stop waiting for the right visitors to walk in. Start bringing them yourself. Fingoh.ai helps exhibitors identify, engage and convert the right prospects before, during and after every trade fair.",
+  description: "Stop waiting for the right visitors to walk in. Start nurturing them yourself. Fingoh.ai helps exhibitors identify, engage and convert the right prospects before, during and after every trade fair.",
   keywords: [
     "trade fair exhibitor software",
     "B2B lead generation",
@@ -13,8 +13,7 @@ export const metadata: Metadata = {
     "exhibitor CRM",
     "pre-show outreach",
     "booth visitor scoring",
-    "pharma trade fair",
-    "CPHI exhibitor tool",
+    "exhibitor marketing"
     "Fingoh",
   ],
   authors: [{ name: "Fingoh.ai", url: "https://fingoh.ai" }],
@@ -28,7 +27,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://fingoh.ai",
     title: "Fingoh.ai — Intent Intelligence for B2B Trade Fairs",
-    description: "Stop waiting for the right visitors to walk in. Start bringing them yourself. Fingoh.ai helps exhibitors identify, engage and convert prospects at every trade fair.",
+    description: "Stop waiting for the right visitors to walk in. Start nurturing them yourself. Fingoh.ai helps exhibitors identify, engage and convert prospects at every trade fair.",
     siteName: "Fingoh.ai",
     images: [
       {
@@ -42,7 +41,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Fingoh.ai — Intent Intelligence for B2B Trade Fairs",
-    description: "Stop waiting for the right visitors to walk in. Start bringing them yourself.",
+    description: "Stop waiting for the right visitors to walk in. Start nurturing them yourself.",
     images: ["/dashboard-preview.png"],
   },
   robots: {
