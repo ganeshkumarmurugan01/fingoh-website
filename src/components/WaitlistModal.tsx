@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { Analytics } from '@/lib/analytics';
 
 interface WaitlistModalProps {
   isOpen: boolean;
@@ -13,8 +14,20 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
   useEffect(() => {
     if (isOpen) {
       setCalendlyKey(String(Date.now()));
+      Analytics.bookDemoClick('modal_open');
     }
   }, [isOpen]);
+
+  // Listen for Calendly booking confirmation
+  useEffect(() => {
+    const handleMessage = (e: MessageEvent) => {
+      if (e.data.event === 'calendly.event_scheduled') {
+        Analytics.demoBooked();
+      }
+    };
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
 
   return (
     <div className={`modal-overlay${isOpen ? ' open' : ''}`} onClick={onClose}>
@@ -48,7 +61,7 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/fingoh-logo-white.png"
+              src="/fingoh-logo.png"
               alt="Fingoh.ai"
               style={{ height: 28, width: 'auto', marginBottom: 12 }}
             />
@@ -60,7 +73,7 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
               marginBottom: 36,
               letterSpacing: '0.01em',
             }}>
-              Product Demonstration · 30 mins
+              Fingoh.ai Product Demo · 30 mins
             </div>
 
             <h2 style={{
@@ -101,7 +114,7 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
           </div>
 
           <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)' }}>
-            © 2026 Fingoh.ai. Akiraas Pte. Ltd.
+            © 2026 Fingoh.ai · Akiraas Pte. Ltd.
           </div>
         </div>
 
@@ -129,7 +142,7 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                 display: 'block',
                 width: '100%',
                 height: 'calc(100% + 60px)',
-                marginTop: 60,
+                marginTop: -60,
               }}
               title="Book a Demo with Fingoh.ai"
             />

@@ -1,4 +1,5 @@
 'use client';
+import { Analytics } from '@/lib/analytics';
 
 import Image from 'next/image';
 
@@ -32,10 +33,7 @@ export default function Navbar({ onOpenModal, onOpenSignup }: NavbarProps) {
             >
               Start Free Trial
             </button>
-            <button
-              onClick={onOpenModal}
-              style={{ background: 'none', border: '1px solid rgba(0,0,0,0.12)', padding: '9px 16px', borderRadius: 6, fontSize: 14, fontWeight: 600, color: '#5A6A7A', cursor: 'pointer', whiteSpace: 'nowrap', fontFamily: 'inherit' }}
-            >
+            <button className="nav-cta" onClick={() => { Analytics.bookDemoClick('navbar'); onOpenModal(); }}>
               Book a Demo
             </button>
           </div>

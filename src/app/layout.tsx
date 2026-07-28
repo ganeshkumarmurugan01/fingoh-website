@@ -13,8 +13,8 @@ export const metadata: Metadata = {
     "exhibitor CRM",
     "pre-show outreach",
     "booth visitor scoring",
-    "exhibitor marketing"
-    "Fingoh",
+    "exhibitor marketing",
+    "Fingoh"
   ],
   authors: [{ name: "Fingoh.ai", url: "https://fingoh.ai" }],
   creator: "Fingoh.ai",

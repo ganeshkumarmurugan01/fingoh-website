@@ -1,4 +1,5 @@
 'use client';
+import { Analytics } from '@/lib/analytics';
 
 interface HeroProps {
   onOpenModal: () => void;
@@ -38,7 +39,9 @@ export default function Hero({ onOpenModal }: HeroProps) {
               </div>
 
               <div className="hero-actions">
-                <button className="btn-primary" onClick={onOpenModal}>Book a Demo</button>
+                <button className="btn-primary" onClick={() => { Analytics.heroCtaClick(); onOpenModal(); }}>
+                      Book a Demo
+                </button>
                 <button className="btn-ghost" onClick={() => document.getElementById('platform')?.scrollIntoView({ behavior: 'smooth' })}>
                   See how it works →
                 </button>

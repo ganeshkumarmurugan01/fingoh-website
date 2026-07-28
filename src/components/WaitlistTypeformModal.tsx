@@ -1,11 +1,31 @@
 'use client';
 
+import { useEffect } from 'react';
+import { Analytics } from '@/lib/analytics';
+
 interface WaitlistTypeformModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
 export default function WaitlistTypeformModal({ isOpen, onClose }: WaitlistTypeformModalProps) {
+  useEffect(() => {
+    if (isOpen) {
+      Analytics.waitlistOpen();
+    }
+  }, [isOpen]);
+
+  // Listen for Typeform submission
+  useEffect(() => {
+    const handleMessage = (e: MessageEvent) => {
+      if (e.data.type === 'form-submit') {
+        Analytics.waitlistSubmitted();
+      }
+    };
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
+
   return (
     <div className={`modal-overlay${isOpen ? ' open' : ''}`} onClick={onClose}>
       <div
@@ -24,7 +44,6 @@ export default function WaitlistTypeformModal({ isOpen, onClose }: WaitlistTypef
           flexDirection: 'column',
         }}
       >
-        {/* Header */}
         <div style={{
           padding: '24px 28px 20px',
           borderBottom: '1px solid rgba(0,0,0,0.08)',
@@ -61,7 +80,6 @@ export default function WaitlistTypeformModal({ isOpen, onClose }: WaitlistTypef
           </button>
         </div>
 
-        {/* Typeform iframe */}
         <div style={{ flex: 1, overflow: 'hidden' }}>
           <iframe
             src="https://form.typeform.com/to/evl9eZLX?typeform-embed=embed-widget&hide-headers=true&hide-footer=true&background=ffffff&font-color=1a1a1a"
