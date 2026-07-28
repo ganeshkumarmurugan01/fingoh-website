@@ -45,16 +45,38 @@ export default function Hero({ onOpenModal }: HeroProps) {
               </div>
             </div>
 
-            <div className="hero-video-wrap">
-                <video
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-  >
-    <source src="/demo-video.mov" type="video/mp4" />
-  </video>
+            <div className="hero-video-wrap" style={{ overflow: 'hidden', borderRadius: 16 }}>
+  <div style={{
+    width: '100%',
+    height: '100%',
+    position: 'relative',
+    animation: 'float 6s ease-in-out infinite',
+  }}>
+    {/* eslint-disable-next-line @next/next/no-img-element */}
+    <img
+      src="/dashboard-preview.png"
+      alt="Fingoh.ai Live Dashboard"
+      style={{
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        objectPosition: 'top left',
+        display: 'block',
+        borderRadius: 16,
+        boxShadow: '0 32px 80px rgba(0,0,0,0.15)',
+      }}
+    />
+    {/* Subtle gradient overlay at bottom */}
+    <div style={{
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+      height: 80,
+      background: 'linear-gradient(to top, rgba(255,255,255,0.8), transparent)',
+      borderRadius: '0 0 16px 16px',
+    }} />
+  </div>
 </div>
           </div>
         </div>
