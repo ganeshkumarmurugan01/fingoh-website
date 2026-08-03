@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const COUNTRIES = [
   'Afghanistan','Albania','Algeria','Argentina','Australia','Austria','Bahrain','Bangladesh',
@@ -13,18 +13,30 @@ const COUNTRIES = [
   'UAE','Ukraine','United Kingdom','United States','Vietnam','Other',
 ];
 
+const EMPTY_FORM = {
+  name: '', company: '', email: '', country: '', password: '', terms: false,
+};
+
 interface SignupModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
 export default function SignupModal({ isOpen, onClose }: SignupModalProps) {
-  const [form, setForm] = useState({
-    name: '', company: '', email: '', country: '', password: '', terms: false,
-  });
+  const [form, setForm] = useState(EMPTY_FORM);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [done, setDone] = useState(false);
+
+  // Reset form every time modal opens or closes
+  useEffect(() => {
+    if (!isOpen) {
+      setForm(EMPTY_FORM);
+      setError('');
+      setDone(false);
+      setLoading(false);
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -59,6 +71,14 @@ export default function SignupModal({ isOpen, onClose }: SignupModalProps) {
     }
   };
 
+  const handleClose = () => {
+    setForm(EMPTY_FORM);
+    setError('');
+    setDone(false);
+    setLoading(false);
+    onClose();
+  };
+
   const inp: React.CSSProperties = {
     width: '100%', padding: '10px 14px', borderRadius: 8,
     border: '1px solid rgba(0,0,0,0.12)', fontSize: 14,
@@ -73,14 +93,14 @@ export default function SignupModal({ isOpen, onClose }: SignupModalProps) {
   return (
     <div
       style={{ position: 'fixed', inset: 0, zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}
-      onClick={e => { if (e.target === e.currentTarget) onClose(); }}
+      onClick={e => { if (e.target === e.currentTarget) handleClose(); }}
     >
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(10,22,40,0.6)', backdropFilter: 'blur(4px)' }} />
       <div style={{ position: 'relative', background: '#fff', borderRadius: 16, width: '100%', maxWidth: 480, maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 24px 64px rgba(0,0,0,0.2)' }}>
 
         {/* Header */}
         <div style={{ padding: '28px 32px 0' }}>
-          <button onClick={onClose} style={{ position: 'absolute', top: 16, right: 16, background: 'none', border: 'none', fontSize: 20, cursor: 'pointer', color: '#94A3B8', lineHeight: 1 }}>×</button>
+          <button onClick={handleClose} style={{ position: 'absolute', top: 16, right: 16, background: 'none', border: 'none', fontSize: 20, cursor: 'pointer', color: '#94A3B8', lineHeight: 1 }}>×</button>
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#3B9EE8', marginBottom: 8 }}>Free Trial</div>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 24, fontWeight: 800, color: '#0A1628', margin: '0 0 4px', letterSpacing: '-0.02em' }}>Start your free trial</h2>
           <p style={{ fontSize: 13, color: '#5A6A7A', margin: '0 0 24px' }}>1 event · 100 contacts · 10 Deep IEI analyses. No credit card required.</p>
@@ -98,7 +118,7 @@ export default function SignupModal({ isOpen, onClose }: SignupModalProps) {
             <div style={{ background: '#FFF7ED', border: '1px solid #FED7AA', borderRadius: 10, padding: '14px 18px', marginBottom: 20 }}>
               <p style={{ fontSize: 13, color: '#92400E', margin: '0 0 6px', fontWeight: 700 }}>⚠ Verify your email to activate your account</p>
               <ol style={{ fontSize: 13, color: '#92400E', margin: 0, paddingLeft: 18, lineHeight: 1.8 }}>
-                <li>Open the verification email from Fingoh</li>
+                <li>Open the verification email from Fingoh.ai</li>
                 <li>Click the <strong>"Confirm your email"</strong> link</li>
                 <li>You'll be redirected to log in automatically</li>
               </ol>
