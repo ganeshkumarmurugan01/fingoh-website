@@ -20,24 +20,14 @@ export default function Footer() {
         </div>
 
         {/* Legal links */}
-        <div style={{
-          borderTop: '1px solid rgba(0,0,0,0.06)',
-          marginTop: 24,
-          paddingTop: 20,
-          display: 'flex',
-          gap: 24,
-          justifyContent: 'center',
-        }}>
-          <Link href="/privacy-policy" style={{ fontSize: 12, color: 'var(--slate-dark)', transition: 'color 0.2s' }}>
-            Privacy Policy
-          </Link>
-          <Link href="/data-processing-agreement" style={{ fontSize: 12, color: 'var(--slate-dark)', transition: 'color 0.2s' }}>
-            Data Processing Agreement
-          </Link>
-          <Link href="/gdpr-notice" style={{ fontSize: 12, color: 'var(--slate-dark)', transition: 'color 0.2s' }}>
-            GDPR Notice
-          </Link>
-        </div>
+       {/* Legal links */}
+<div className="footer-legal">
+  <Link href="/privacy-policy">Privacy Policy</Link>
+  <span style={{ color: 'var(--border)' }}>·</span>
+  <Link href="/data-processing-agreement">Data Processing Agreement</Link>
+  <span style={{ color: 'var(--border)' }}>·</span>
+  <Link href="/gdpr-notice">GDPR Notice</Link>
+</div>
       </div>
     </footer>
   );

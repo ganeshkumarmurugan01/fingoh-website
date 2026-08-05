@@ -1,11 +1,11 @@
 'use client';
-import { Analytics } from '@/lib/analytics';
 
 import Image from 'next/image';
+import { Analytics } from '@/lib/analytics';
 
 interface NavbarProps {
   onOpenModal: () => void;
-  onOpenSignup: () => void;
+  onOpenSignup?: () => void;
 }
 
 export default function Navbar({ onOpenModal, onOpenSignup }: NavbarProps) {
@@ -14,7 +14,7 @@ export default function Navbar({ onOpenModal, onOpenSignup }: NavbarProps) {
       <div className="container">
         <div className="nav-inner">
           <div className="nav-logo">
-            <Image src="/fingoh-logo.png" alt="Fingoh" width={120} height={32} style={{ height: 32, width: 'auto' }} />
+            <Image src="/fingoh-logo.png" alt="Fingoh.ai" width={120} height={32} style={{ height: 32, width: 'auto' }} />
           </div>
 
           <ul className="nav-links">
@@ -25,15 +25,13 @@ export default function Navbar({ onOpenModal, onOpenSignup }: NavbarProps) {
             <li><a href="mailto:hello@fingoh.ai">hello@fingoh.ai</a></li>
           </ul>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <button
-              className="nav-cta"
-              onClick={onOpenSignup}
-              style={{ background: '#3B9EE8', color: '#fff' }}
-            >
-              Start Free Trial
-            </button>
-            <button className="nav-cta" onClick={() => { Analytics.bookDemoClick('navbar'); onOpenModal(); }}> 
+          <div className="nav-actions">
+            {onOpenSignup && (
+              <button className="nav-signup" onClick={onOpenSignup}>
+                Start Free Trial
+              </button>
+            )}
+            <button className="nav-cta" onClick={() => { Analytics.bookDemoClick('navbar'); onOpenModal(); }}>
               Book a Demo
             </button>
           </div>

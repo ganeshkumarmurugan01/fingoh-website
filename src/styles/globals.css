@@ -707,6 +707,45 @@ footer { border-top: 1px solid var(--border); padding: 32px 0; }
 .fade-up.delay-3 { transition-delay: 0.3s; }
 
 /* ── RESPONSIVE ─────────────────────────────────────────────────────────── */
+/* ── NAV ACTIONS ────────────────────────────────────────────────────────── */
+.nav-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.nav-signup {
+  background: #3B9EE8;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-signup:hover { background: #2b8fd8; transform: translateY(-1px); }
+
+/* ── FOOTER LEGAL ───────────────────────────────────────────────────────── */
+.footer-legal {
+  border-top: 1px solid rgba(0,0,0,0.06);
+  margin-top: 24px;
+  padding-top: 20px;
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.footer-legal a {
+  font-size: 12px;
+  color: var(--slate-dark);
+  transition: color 0.2s;
+}
+.footer-legal a:hover { color: var(--navy); }
+
+/* ── RESPONSIVE 900px ───────────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .hero-body { grid-template-columns: 1fr; gap: 48px; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
@@ -721,9 +760,94 @@ footer { border-top: 1px solid var(--border); padding: 32px 0; }
   .nav-links { display: none; }
   .cta-actions { flex-direction: column; align-items: center; }
   .footer-inner { flex-direction: column; gap: 20px; text-align: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+  .annual-cards { grid-template-columns: 1fr; }
+}
+
+/* ── RESPONSIVE 600px ───────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .container { padding: 0 16px; }
+
+  /* Hero */
+  #hero { padding-top: 80px; }
+  .hero-inner { padding: 80px 0 48px; }
+  .hero-h1 { font-size: 28px; line-height: 1.3; }
+  .hero-sub { font-size: 15px; }
+  .hero-actions { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .btn-primary { width: 100%; text-align: center; }
+  .hero-tag span { font-size: 13px; }
+  .hero-headline-block { margin-bottom: 32px; }
+
+  /* Stats */
+  #stats { padding: 32px 0; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .stat-number { font-size: 28px; }
+  .stat-label { font-size: 11px; }
+
+  /* Sections */
+  #problem, #platform, #how, #questions,
+  #solutions, #pricing, #moats { padding: 56px 0; }
+  #cta { padding: 72px 0; }
+
+  /* Problem */
+  .problem-headline { font-size: 22px; margin-bottom: 32px; }
+  .pain-number { font-size: 40px; }
+  .pain-card { padding: 24px; }
+  .pain-label { font-size: 14px; }
+
+  /* Platform */
+  .platform-header h2 { font-size: 24px; }
+  .platform-header p { font-size: 15px; }
+  .module-card { padding: 24px; }
+  .module-name { font-size: 18px; }
+
+  /* How it works */
+  .how-header h2 { font-size: 24px; }
+  .how-header p { font-size: 15px; }
+  .step-card { padding: 24px; }
+  .step-num { font-size: 48px; }
+  .step-title { font-size: 18px; }
+
+  /* Questions */
+  .questions-header h2 { font-size: 24px; }
+  .questions-header p { font-size: 15px; }
+
+  /* Solutions */
+  .solutions-header h2 { font-size: 24px; }
+  .solutions-header p { font-size: 15px; }
+  .solution-card { padding: 24px; }
+  .solution-name { font-size: 20px; }
+
+  /* Pricing */
+  .pricing-header h2 { font-size: 24px; }
+  .pricing-philosophy { padding: 16px 20px; font-size: 13px; }
+  .price-card { padding: 24px; }
+  .price-name { font-size: 18px; }
+
+  /* Moats */
+  .moats-header h2 { font-size: 24px; }
+  .moats-header p { font-size: 15px; }
+  .moat-card { padding: 24px; }
+
+  /* CTA */
+  #cta h2 { font-size: 28px; }
+  #cta p { font-size: 15px; }
+  .btn-cta-primary, .btn-cta-ghost { width: 100%; text-align: center; }
+
+  /* Navbar */
+  .nav-actions { gap: 8px; }
+  .nav-signup { display: block; font-size: 11px; padding: 8px 10px; }
+  .nav-cta { padding: 8px 12px; font-size: 12px; }
+  .nav-logo img { height: 24px !important; }
+
+  /* Footer */
+  .footer-inner { flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+  .footer-links { display: none; }
+  .footer-copy { font-size: 12px; }
+  .footer-legal { flex-direction: column; align-items: center; gap: 10px; margin-top: 16px; }
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-10px); }
+  50% { transform: translateY(-10px); }
 }
