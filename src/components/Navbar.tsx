@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { Analytics } from '@/lib/analytics';
+import Link from 'next/link';
 
 interface NavbarProps {
   onOpenModal: () => void;
@@ -26,15 +27,15 @@ export default function Navbar({ onOpenModal, onOpenSignup }: NavbarProps) {
           </ul>
 
           <div className="nav-actions">
-            {onOpenSignup && (
-              <button className="nav-signup" onClick={onOpenSignup}>
-                Start Free Trial
-              </button>
-            )}
-            <button className="nav-cta" onClick={() => { Analytics.bookDemoClick('navbar'); onOpenModal(); }}>
-              Book a Demo
+            <Link href="/signup">
+            <button className="nav-signup">
+             Start Free Trial
             </button>
-          </div>
+            </Link>
+            <button className="nav-cta" onClick={() => { Analytics.bookDemoClick('navbar'); onOpenModal(); }}>
+            Book a Demo
+            </button>
+</div>
         </div>
       </div>
     </nav>

@@ -1,3 +1,5 @@
+import Link from "next/dist/client/link";
+
 interface PricingProps {
   onOpenModal: () => void;
   onOpenSignup: () => void;
@@ -79,12 +81,11 @@ export default function Pricing({ onOpenModal, onOpenSignup }: PricingProps) {
                   <li key={j}>{f}</li>
                 ))}
               </ul>
-              <button
-                className={`btn-price ${plan.featured ? 'primary-btn' : 'ghost-btn'}`}
-                onClick={plan.ctaAction === 'signup' ? onOpenSignup : onOpenModal}
-              >
+              <Link href="/signup">
+                <button className={`btn-price ${plan.featured ? 'primary-btn' : 'ghost-btn'}`}>
                 {plan.cta}
-              </button>
+                </button>
+                </Link>
             </div>
           ))}
         </div>
