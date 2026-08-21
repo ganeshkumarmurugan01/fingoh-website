@@ -1,9 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import type { Metadata } from 'next';
 
 const COUNTRIES = [
   'Afghanistan','Albania','Algeria','Argentina','Australia','Austria','Bahrain','Bangladesh',
@@ -20,22 +19,67 @@ const EMPTY_FORM = {
   name: '', company: '', email: '', country: '', password: '', terms: false,
 };
 
+declare global {
+  interface Window {
+    turnstile: {
+      render: (container: string | HTMLElement, options: Record<string, unknown>) => string;
+      reset: (widgetId: string) => void;
+    };
+  }
+}
+
 export default function SignupPage() {
   const [form, setForm] = useState(EMPTY_FORM);
+  const [honeypot, setHoneypot] = useState('');
+  const [tsToken, setTsToken] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [done, setDone] = useState(false);
+  const widgetRef = useRef<string | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Load Turnstile script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+      if (containerRef.current && window.turnstile) {
+        widgetRef.current = window.turnstile.render(containerRef.current, {
+          sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
+          callback: (token: string) => setTsToken(token),
+          'expired-callback': () => setTsToken(''),
+          'error-callback': () => setTsToken(''),
+        });
+      }
+    };
+    document.head.appendChild(script);
+    return () => { document.head.removeChild(script); };
+  }, []);
 
   const set = (k: string, v: string | boolean) => setForm(p => ({ ...p, [k]: v }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+
     if (!form.terms) { setError('Please agree to the Terms of Use to continue.'); return; }
     if (form.password.length < 8) { setError('Password must be at least 8 characters.'); return; }
+    if (!tsToken) { setError('Please complete the security check.'); return; }
 
     setLoading(true);
     try {
+      // Verify Turnstile first
+      const verifyRes = await fetch('/api/verify-turnstile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tsToken, honeypot }),
+      });
+      const verifyData = await verifyRes.json();
+      if (!verifyData.success) throw new Error('Security check failed. Please try again.');
+
+      // Submit signup
       const res = await fetch('https://api.fingoh.ai/api/v1/onboarding/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -49,6 +93,7 @@ export default function SignupPage() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.detail || 'Signup failed. Please try again.');
+
       setDone(true);
 
       // GA4 tracking
@@ -57,6 +102,11 @@ export default function SignupPage() {
       }
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Something went wrong.');
+      // Reset Turnstile on failure
+      if (widgetRef.current && window.turnstile) {
+        window.turnstile.reset(widgetRef.current);
+        setTsToken('');
+      }
     } finally {
       setLoading(false);
     }
@@ -166,6 +216,18 @@ export default function SignupPage() {
                 </p>
 
                 <form onSubmit={handleSubmit}>
+
+                  {/* Honeypot — hidden from real users */}
+                  <input
+                    type="text"
+                    name="website"
+                    value={honeypot}
+                    onChange={e => setHoneypot(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    style={{ position: 'absolute', left: '-9999px', top: '-9999px', opacity: 0, height: 0, width: 0 }}
+                  />
+
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
                     <div>
                       <label style={lbl}>Full Name *</label>
@@ -206,6 +268,9 @@ export default function SignupPage() {
                       <Link href="/gdpr-notice" target="_blank" style={{ color: '#3B9EE8', textDecoration: 'underline' }}>GDPR Notice</Link>.
                     </span>
                   </label>
+
+                  {/* Turnstile widget */}
+                  <div ref={containerRef} style={{ marginBottom: 16 }} />
 
                   {error && (
                     <div style={{ background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: 8, padding: '10px 14px', fontSize: 13, color: '#DC2626', marginBottom: 16 }}>
